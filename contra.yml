@@ -1,0 +1,30 @@
+---
+infra:
+  provision:
+    cloud:
+      openstack:
+        network:
+        - atomic-e2e-jenkins-test
+        key_pair: ci-factory
+        security_group:
+          - default
+        instances:
+        - name: rnester-database
+          flavor: m1.small
+          image: CentOS-7-x86_64-GenericCloud-1612
+          floating_ip_pool: 10.8.240.0
+          user: centos
+  configure:
+    playbooks:
+      - location: playbooks/configuration/install_vim.yml
+tests:
+  playbooks:
+    - location: playbooks/tests/verify_vim.yml
+results:
+  outputTypes:
+    artifacts:
+      filesToSave:
+        - 'linchpin/*'
+        - 'resources/*'
+        - 'Jenkinsfile'
+      filesToExclude: 'inventory'
