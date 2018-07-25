@@ -15,33 +15,31 @@ createDslContainers podName: dslPodName,
   node(dslPodName){
       stage("pre-flight"){
           deleteDir()
-          git branch: 'addLoggingPrimitive', url: 'https://github.com/robnester-rh/hdsl_sample'
+          git branch: 'config_file', url: 'https://github.com/robnester-rh/hdsl-examples.git'
       }
 
       stage("Parse Configuration"){
           parseConfig()
-          echo env.configJSON
       }
 
       stage("Deploy Infra"){
-          deployInfra verbose: true
+          deployInfra()
       }
 
       stage("Configure Infra"){
-          configureInfra verbose: true
+          configureInfra baseDir: 'configure'
       }
 
       stage("Execute Tests"){
-          executeTests verbose: true
+          executeTests baseDir: 'tests'
       }
 
       stage("Destroy Infra"){
-          destroyInfra verbose: true
+          destroyInfra()
       }
 
       stage("Archive stuff"){
-          saveArtifacts filesToExclude: 'README.md',
-          filesToSave:'contra.yml'
+          saveArtifacts()
       }
   }
 }
