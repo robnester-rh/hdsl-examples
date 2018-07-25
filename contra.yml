@@ -15,9 +15,17 @@ infra:
           floating_ip_pool: 10.8.240.0
           user: centos
   configure:
+    repo:
+        url: https://github.com/robnester-rh/hdsl-examples.git
+        branch: infra_config
+        destination_folder: configure
     playbooks:
       - location: playbooks/configuration/install_vim.yml
 tests:
+  repo:
+      url: https://github.com/robnester-rh/hdsl-examples.git
+      branch: infra_tests
+      destination_folder: tests
   playbooks:
     - location: playbooks/tests/verify_vim.yml
 results:
@@ -26,5 +34,4 @@ results:
       filesToSave:
         - 'linchpin/*'
         - 'resources/*'
-        - 'Jenkinsfile'
-      filesToExclude: 'inventory'
+        - 'inventory'
