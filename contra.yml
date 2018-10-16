@@ -9,9 +9,14 @@ infra:
         security_group:
           - default
         instances:
-        - name: rnester-database
+        - name: rnester-server1
           flavor: m1.small
           image: CentOS-7-x86_64-GenericCloud-1612
+          floating_ip_pool: 10.8.240.0
+          user: centos
+        - name: rnester-server2
+          flavor: m1.small
+          image: CentOS-7-x86_64-GenericClould-1612
           floating_ip_pool: 10.8.240.0
           user: centos
   configure:

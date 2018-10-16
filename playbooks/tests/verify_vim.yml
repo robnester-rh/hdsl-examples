@@ -1,5 +1,5 @@
 ---
-- hosts: rnester-database  
+- hosts: rnester-server1
   tasks:
   - name: Check if httpd pkg installed
     command: rpm -q vim-enhanced

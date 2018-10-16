@@ -1,5 +1,5 @@
 ---
-- hosts: rnester-database
+- hosts: rnester-server1
   become: yes
   become_user: root
 
